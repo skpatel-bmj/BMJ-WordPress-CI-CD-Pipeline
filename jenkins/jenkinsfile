@@ -1,0 +1,81 @@
+pipeline {
+    agent any
+    stages {
+        stage('Git_Code_Downloding') {
+            steps {
+                script
+                {
+                   try
+                   {
+                       git 'Github URL'
+                       echo 'Git Code Downloding .....DON'
+                   }
+                   catch(Exception e1)
+                   {
+                     echo "Git Downloading Not working plz check..."
+                     exit(1)
+                   }
+                }
+            }
+        }
+        stage('CreateDockerImages') {
+            steps {
+                script
+                {
+                   try
+                   {
+                    sh "sudo docker build -t name:${BUILD_TAG} ."
+                    echo 'MVN Package .....DON'
+                   }
+                   catch(Exception e2)
+                   {
+                     echo "CreateDockerImages Not working plz check..."
+                     exit(1)
+                   }
+                }
+            }
+        }
+        stage('ImagesPushinHub') {
+            steps {
+                script
+                {
+                   try
+                   {
+                     sh "sudo docker push name:${BUILD_TAG}"
+                   echo 'Images Push in Hub .....DON'
+                   }
+                   catch(Exception e3)
+                   {
+                     echo "Images Push in Hub Not Download plz check..."
+                     exit(1)
+                   }
+                }
+            }
+        }
+        stage('Container-Run-on-docker-compose') {
+            steps {
+                script
+                {
+                   try
+                   {
+                    sh 'sudo docker-compose up -d'
+                    echo 'Container-Run-on-docker-compose.....DON'
+                   }
+                   catch(Exception e4)
+                   {
+                     echo "Container-Run-on-docker-compose Not woring plz check..."
+                     exit(1)
+                   }
+                }
+            }
+        }
+    }
+    
+  post {
+      always { echo "This block always runing....."}
+      aborted { echo "build process is aborted.....................OK" }
+      failure { echo "build is failed..............OK" }
+      success { echo "build is succeeded........OK" }
+      unsuccessful { echo "This block runs when the current status is anything except success." }
+     }
+}
