@@ -60,4 +60,11 @@ services:
       - apache:httpd
 ...
 ```
+### Command
+```
+# vim docker-compose.yml
+# docker compose up -d
+# docker compose stop
+# docker compose down
+```
 
