@@ -5,7 +5,8 @@
 ## BMJ-WordPress-CI-CD-Pipeline
 <img width="744" alt="Screenshot 2023-03-29 135858" src="https://user-images.githubusercontent.com/125953981/228518808-fad33d6e-d820-4f76-a911-afb2c63c11b5.png">
 
-CI/CD pipeline phases
+### CI/CD pipeline phases
+```
 Continuous planning
 Continuous coding
 Continuous Build
@@ -15,4 +16,5 @@ Continuous Deploy
 Continuous operation
 Continuous monitoring
 Continuous feedback
-
+```
+<img width="231" alt="Screenshot 2023-03-29 132832" src="https://user-images.githubusercontent.com/125953981/228519825-ee5c0f92-e900-4dd2-a8a5-6043a4df2a34.png">
