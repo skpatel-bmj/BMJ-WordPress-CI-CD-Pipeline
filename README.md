@@ -17,4 +17,17 @@ Continuous operation
 Continuous monitoring
 Continuous feedback
 ```
-<img width="231" alt="Screenshot 2023-03-29 132832" src="https://user-images.githubusercontent.com/125953981/228519825-ee5c0f92-e900-4dd2-a8a5-6043a4df2a34.png">
+
+## Jenkins Installing Using User data
+### this program file install jenking for permanent in Debian Unbuntu server
+```
+#! /bin/bash
+sudo apt-get update 
+sudo apt-get install -y openjdk-11-jdk
+sudo apt-get install -y git maven
+curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo tee   /usr/share/keyrings/jenkins-keyring.asc > /dev/null
+echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc]   https://pkg.jenkins.io/debian-stable binary/ | sudo tee   /etc/apt/sources.list.d/jenkins.list > /dev/null
+sudo apt-get update
+sudo apt-get install -y jenkins
+sudo systemctl start jenkins
+```
