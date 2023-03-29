@@ -1,7 +1,6 @@
 # DevOps(CI/CD) Pipeline
 <img width="584" alt="Screenshot 2023-03-29 120023" src="https://user-images.githubusercontent.com/125953981/228519161-70adf468-066e-4cae-a4b7-7390d0f504a6.png">
 
-
 ## BMJ-WordPress-CI-CD-Pipeline
 <img width="744" alt="Screenshot 2023-03-29 135858" src="https://user-images.githubusercontent.com/125953981/228518808-fad33d6e-d820-4f76-a911-afb2c63c11b5.png">
 
@@ -31,3 +30,34 @@ sudo apt-get update
 sudo apt-get install -y jenkins
 sudo systemctl start jenkins
 ```
+## install docker
+```
+#! /bin/bash
+apt-get update
+curl -fsSL https://test.docker.com -o test-docker.sh
+sh test-docker.sh
+```
+# Docker-compose file Example
+## LAMP Container Architecture
+```
+---
+version: '3.8'
+services:
+  mydb:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: sandeep
+  apache:
+    image: httpd
+    ports:
+      - 9999:80
+    links:
+      - mydb:mysql
+  php:
+    image: php:7.2-apache
+    links:
+      - mydb:mysql
+      - apache:httpd
+...
+```
+
