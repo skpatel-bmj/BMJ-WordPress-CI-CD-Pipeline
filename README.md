@@ -67,4 +67,13 @@ services:
 # docker compose stop
 # docker compose down
 ```
+## 
+```
+stage('Filter New Changs') {
+            steps {
+                echo 'filter out new changes......................'
+                sh 'find -type f -mmin -1 | grep -v ".git"'
+            }
+        }
+```        
 
