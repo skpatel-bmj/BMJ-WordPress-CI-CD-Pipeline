@@ -16,6 +16,8 @@ Continuous operation
 Continuous monitoring
 Continuous feedback
 ```
+### block diagram
+<img width="557" alt="Screenshot 2023-04-04 174301" src="https://user-images.githubusercontent.com/125953981/229787916-74ab6540-763c-4891-b517-3b76e364026b.png">
 
 ## Jenkins Installing Using User data
 ### this program file install jenking for permanent in Debian Unbuntu server
