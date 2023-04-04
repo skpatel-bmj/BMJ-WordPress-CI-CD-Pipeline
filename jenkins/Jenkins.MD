@@ -1,4 +1,6 @@
 # Jenkins Pipeline Environment Variables 
+Using env-vars.html
+You can open ${YOUR_JENKINS_HOST}/env-vars.html page on your Jenkins master server to get a list of all environment variables listed on an HTML page
 ### Print Env Variables 
 Alternatively, you can list all environment variables by executing the printenv shell command.
 
