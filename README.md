@@ -45,6 +45,47 @@ sudo yum install jenkins -y
 sudo systemctl enable jenkins
 sudo systemctl start jenkins
 ```
+## Main JenkinFile Code
+```
+pipeline {
+    agent any
+    stages {
+        stage('Deployment-On-Stg-Server') {
+            steps {
+                input 'Deployment On Stg'
+                echo "##############################################################################################"
+                echo "Deployment On Stg Server Starting...."
+                sshagent(['new']) 
+                {
+                sh " ssh -o  StrictHostKeyChecking=no ec2-user@<pubilc IP> 'sudo rm -rf *'"
+                sh " ssh -o  StrictHostKeyChecking=no ec2-user@<pubilc IP> 'sudo git clone https://github.com/Ersandeep977/BMJ-test.git'"
+                sh " ssh -o  StrictHostKeyChecking=no ec2-user@<pubilc IP> 'sudo rm -rf /var/www/html/*'"
+                sh " ssh -o  StrictHostKeyChecking=no ec2-user@<pubilc IP> 'sudo cp BMJ-test/i.html /var/www/html/'"
+                 }
+                echo "##############################################################################################"    
+                echo "Deployment On Stg Server .... Done"
+            }
+        }
+        stage('Deployment-On-Live-Server') {
+            steps {
+                input 'Deployment On Live'
+                echo "##############################################################################################"
+                echo "Deployment On Live Server Starting...."
+                sshagent(['new']) 
+                {
+                sh " ssh -o  StrictHostKeyChecking=no ec2-user@<pubilc IP> 'sudo rm -rf *'"
+                sh " ssh -o  StrictHostKeyChecking=no ec2-user@<pubilc IP> 'sudo git clone https://github.com/Ersandeep977/BMJ-test.git'"
+                sh " ssh -o  StrictHostKeyChecking=no ec2-user@<pubilc IP> 'sudo rm -rf /var/www/html/*'"
+                sh " ssh -o  StrictHostKeyChecking=no ec2-user@<pubilc IP> 'sudo cp BMJ-test/i.html /var/www/html/'"
+                }
+                echo "##############################################################################################"    
+                echo "Deployment On Live Server .... Done"
+            }
+        }
+    }
+}
+```
+
 ## Install docker
 ```
 #! /bin/bash
