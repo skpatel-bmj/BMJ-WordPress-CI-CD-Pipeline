@@ -52,15 +52,15 @@ pipeline {
     stages {
         stage('Deployment-On-Stg-Server') {
             steps {
-                input 'Deployment On Stg'
                 echo "##############################################################################################"
                 echo "Deployment On Stg Server Starting...."
-                sshagent(['new']) 
+                sshagent(credentials: ['Web-Server'], ignoreMissing: true) 
                 {
-                sh " ssh -o  StrictHostKeyChecking=no ec2-user@<pubilc IP> 'sudo rm -rf *'"
-                sh " ssh -o  StrictHostKeyChecking=no ec2-user@<pubilc IP> 'sudo git clone https://github.com/Ersandeep977/BMJ-test.git'"
-                sh " ssh -o  StrictHostKeyChecking=no ec2-user@<pubilc IP> 'sudo rm -rf /var/www/html/*'"
-                sh " ssh -o  StrictHostKeyChecking=no ec2-user@<pubilc IP> 'sudo cp BMJ-test/i.html /var/www/html/'"
+                sh " ssh -o  StrictHostKeyChecking=no ec2-user@<Pubilc IP> 'sudo systemctl restart httpd'"    
+                sh " ssh -o  StrictHostKeyChecking=no ec2-user@<Pubilc IP> 'sudo rm -rf *'"
+                sh " ssh -o  StrictHostKeyChecking=no ec2-user@<Pubilc IP> 'sudo git clone https://github.com/Ersandeep977/BMJ-test.git'"
+                sh " ssh -o  StrictHostKeyChecking=no ec2-user@<Pubilc IP> 'sudo rm -rf /var/www/html/*'"
+                sh " ssh -o  StrictHostKeyChecking=no ec2-user@<Pubilc IP> 'sudo cp BMJ-test/i.html /var/www/html/'"
                  }
                 echo "##############################################################################################"    
                 echo "Deployment On Stg Server .... Done"
@@ -68,20 +68,27 @@ pipeline {
         }
         stage('Deployment-On-Live-Server') {
             steps {
-                input 'Deployment On Live'
                 echo "##############################################################################################"
                 echo "Deployment On Live Server Starting...."
-                sshagent(['new']) 
+                sshagent(credentials: ['Web-Server'], ignoreMissing: true)
                 {
-                sh " ssh -o  StrictHostKeyChecking=no ec2-user@<pubilc IP> 'sudo rm -rf *'"
-                sh " ssh -o  StrictHostKeyChecking=no ec2-user@<pubilc IP> 'sudo git clone https://github.com/Ersandeep977/BMJ-test.git'"
-                sh " ssh -o  StrictHostKeyChecking=no ec2-user@<pubilc IP> 'sudo rm -rf /var/www/html/*'"
-                sh " ssh -o  StrictHostKeyChecking=no ec2-user@<pubilc IP> 'sudo cp BMJ-test/i.html /var/www/html/'"
+                sh " ssh -o  StrictHostKeyChecking=no ec2-user@<Pubilc IP> 'sudo systemctl restart httpd'"
+                sh " ssh -o  StrictHostKeyChecking=no ec2-user@<Pubilc IP> 'sudo rm -rf *'"
+                sh " ssh -o  StrictHostKeyChecking=no ec2-user@<Pubilc IP> 'sudo git clone https://github.com/Ersandeep977/BMJ-test.git'"
+                sh " ssh -o  StrictHostKeyChecking=no ec2-user@<Pubilc IP> 'sudo rm -rf /var/www/html/*'"
+                sh " ssh -o  StrictHostKeyChecking=no ec2-user@<Pubilc IP> 'sudo cp BMJ-test/i.html /var/www/html/'"
                 }
                 echo "##############################################################################################"    
                 echo "Deployment On Live Server .... Done"
             }
         }
+    }
+    post {
+      always { echo "This block always runing....."}
+      aborted { echo "build process is aborted.....................OK" }
+      failure { echo "build is failed..............OK" }
+      success { echo "build is succeeded........OK" }
+      unsuccessful { echo "This block runs when the current status is anything except success." }
     }
 }
 ```
