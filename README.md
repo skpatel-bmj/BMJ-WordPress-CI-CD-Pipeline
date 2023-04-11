@@ -93,6 +93,113 @@ pipeline {
     }
 }
 ```
+## Jenkins Dashboard 
+<img width="949" alt="Screenshot 2023-04-11 105932" src="https://user-images.githubusercontent.com/125953981/231065569-fdfedbd9-c1d4-4ca2-a701-59f9c3712aa0.png">
+
+## Jenkins Console Output
+```
+Started by upstream project "Git-Hub-Webhook" build number 26
+originally caused by:
+ Started by GitHub push by Ersandeep977
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/lib/jenkins/workspace/Deployment
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Deployment-On-Stg-Server)
+[Pipeline] echo
+##############################################################################################
+[Pipeline] echo
+Deployment On Stg Server Starting....
+[Pipeline] sshagent
+[ssh-agent] Using credentials ec2-user (wp-server)
+[ssh-agent] Looking for ssh-agent implementation...
+[ssh-agent]   Exec ssh-agent (binary ssh-agent on a remote machine)
+$ ssh-agent
+SSH_AUTH_SOCK=/tmp/ssh-XXXXXXakyeFB/agent.2772
+SSH_AGENT_PID=2774
+Running ssh-add (command line suppressed)
+Identity added: /var/lib/jenkins/workspace/Deployment@tmp/private_key_15066038905127290818.key (/var/lib/jenkins/workspace/Deployment@tmp/private_key_15066038905127290818.key)
+[ssh-agent] Started.
+[Pipeline] {
+[Pipeline] sh
++ ssh -o StrictHostKeyChecking=no ec2-user@3.92.61.179 'sudo systemctl restart httpd'
+[Pipeline] sh
++ ssh -o StrictHostKeyChecking=no ec2-user@3.92.61.179 'sudo rm -rf *'
+[Pipeline] sh
++ ssh -o StrictHostKeyChecking=no ec2-user@3.92.61.179 'sudo git clone https://github.com/Ersandeep977/BMJ-test.git'
+Cloning into 'BMJ-test'...
+[Pipeline] sh
++ ssh -o StrictHostKeyChecking=no ec2-user@3.92.61.179 'sudo rm -rf /var/www/html/*'
+[Pipeline] sh
++ ssh -o StrictHostKeyChecking=no ec2-user@3.92.61.179 'sudo cp BMJ-test/i.html /var/www/html/'
+[Pipeline] }
+$ ssh-agent -k
+unset SSH_AUTH_SOCK;
+unset SSH_AGENT_PID;
+echo Agent pid 2774 killed;
+[ssh-agent] Stopped.
+[Pipeline] // sshagent
+[Pipeline] echo
+##############################################################################################
+[Pipeline] echo
+Deployment On Stg Server .... Done
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Deployment-On-Live-Server)
+[Pipeline] echo
+##############################################################################################
+[Pipeline] echo
+Deployment On Live Server Starting....
+[Pipeline] sshagent
+[ssh-agent] Using credentials ec2-user (wp-server)
+[ssh-agent] Looking for ssh-agent implementation...
+[ssh-agent]   Exec ssh-agent (binary ssh-agent on a remote machine)
+$ ssh-agent
+SSH_AUTH_SOCK=/tmp/ssh-XXXXXXm8Byng/agent.2900
+SSH_AGENT_PID=2902
+Running ssh-add (command line suppressed)
+Identity added: /var/lib/jenkins/workspace/Deployment@tmp/private_key_2377313605624249529.key (/var/lib/jenkins/workspace/Deployment@tmp/private_key_2377313605624249529.key)
+[ssh-agent] Started.
+[Pipeline] {
+[Pipeline] sh
++ ssh -o StrictHostKeyChecking=no ec2-user@3.88.70.231 'sudo systemctl restart httpd'
+[Pipeline] sh
++ ssh -o StrictHostKeyChecking=no ec2-user@3.88.70.231 'sudo rm -rf *'
+[Pipeline] sh
++ ssh -o StrictHostKeyChecking=no ec2-user@3.88.70.231 'sudo git clone https://github.com/Ersandeep977/BMJ-test.git'
+Cloning into 'BMJ-test'...
+[Pipeline] sh
++ ssh -o StrictHostKeyChecking=no ec2-user@3.88.70.231 'sudo rm -rf /var/www/html/*'
+[Pipeline] sh
++ ssh -o StrictHostKeyChecking=no ec2-user@3.88.70.231 'sudo cp BMJ-test/i.html /var/www/html/'
+[Pipeline] }
+$ ssh-agent -k
+unset SSH_AUTH_SOCK;
+unset SSH_AGENT_PID;
+echo Agent pid 2902 killed;
+[ssh-agent] Stopped.
+[Pipeline] // sshagent
+[Pipeline] echo
+##############################################################################################
+[Pipeline] echo
+Deployment On Live Server .... Done
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Declarative: Post Actions)
+[Pipeline] echo (hide)
+This block always runing.....
+[Pipeline] echo
+build is succeeded........OK
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
+```
 
 ## Install docker
 ```
