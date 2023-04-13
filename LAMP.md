@@ -1,9 +1,8 @@
 #  LAMP Stack
 ![lamp-1](https://user-images.githubusercontent.com/125953981/231667548-4f15dab4-6a5e-4a62-b12a-5216792c8cf7.jpg)
 ## What is a LAMP Stack?
-```
 The LAMP Stack is an acronym for Linux, Apache, MySQL, and PHP. It includes an operating system, a web server, a database, and a versatile programming language. 
-```
+
 ## Linux
 ```
 Linux is an operating system based on UNIX. Linux is available for free as open source technology. 
