@@ -23,3 +23,23 @@ Alternatives to PHP include Perl and Python, which can also serve as the P in th
 
 # LAMP (Linux, Apache, MySQL, PHP) Stack-On AWS Cloud
 <img width="551" alt="Screenshot 2023-04-13 114427" src="https://user-images.githubusercontent.com/125953981/231669829-6cb0c347-52af-4fe2-9412-c99f2eace67b.png">
+## Sheel Script
+```
+#! /bin/bash
+
+echo "Clear all folder...."
+sudo rm -rf backup/*
+echo "HTML Backup Creation....."
+sudo mkdir backup/html$(date +"%Y%m%d-%H%M%S")
+sudo cp -r /var/www/html/* backup/html$(date +"%Y%m%d-%H%M%S")
+echo ""
+echo "HTML Backup Creation....."
+echo ""
+echo "SQl Backup Creation...."
+mysql -u root -p root webdata > backup/dbserver-$(date +\%Y\%m\%d-%H\%M\%S).sql
+echo ""
+echo "Upload to s3 bucket....."
+aws s3 sync backup s3://bmj-wp-lamp-server/
+echo ""
+echo "all task done..."
+```
