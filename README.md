@@ -246,5 +246,25 @@ stage('Filter New Changs') {
                 sh 'find -type f -mmin -1 | grep -v ".git"'
             }
         }
-```        
+```   
+## bash script
+```
+#! /bin/bash
+
+echo "Clear all folder...."
+sudo rm -rf backup/*
+echo "HTML Backup Creation....."
+sudo mkdir backup/html$(date +"%Y%m%d-%H%M%S")
+sudo cp -r /var/www/html/* backup/html$(date +"%Y%m%d-%H%M%S")
+echo ""
+echo "HTML Backup Creation....."
+echo ""
+echo "SQl Backup Creation...."
+mysql -u root -p root webdata > backup/dbserver-$(date +\%Y\%m\%d-%H\%M\%S).sql
+echo ""
+echo "Upload to s3 bucket....."
+aws s3 sync backup s3://bmj-wp-lamp-server/
+echo ""
+echo "all task done..."
+```
 
