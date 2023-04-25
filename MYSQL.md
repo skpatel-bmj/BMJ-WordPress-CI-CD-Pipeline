@@ -5,8 +5,8 @@ The mysqldump command is a tool used to backup and restore MySQL databases. It i
 
 ``` mysql -h hostname -u username -p ```
 
-Some common options used with the mysqldump command are:
--u : username to connect to the MySQL server
+### Some common options used with the mysqldump command are:
+```-u : username to connect to the MySQL server
 -p : password for the user
 -h : hostname or IP address of the MySQL server
 --databases : specifies the databases to be dumped
@@ -14,7 +14,7 @@ Some common options used with the mysqldump command are:
 --verbose : provides detailed information during the backup process
 --compress : compresses the backup file
 --add-drop-table : adds DROP TABLE statement before each CREATE TABLE statement
-
+```
 The basic syntax of the mysqldump command is:
 
 ```mysqldump -u myusername -p mypassword mydatabase > backup.sql```
