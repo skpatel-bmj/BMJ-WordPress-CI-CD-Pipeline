@@ -62,3 +62,10 @@ mysqldump -u $USER -p$PASSWORD $DATABASE > $BACKUP_FILE
 # Print status message
 echo "Backup completed: $BACKUP_FILE"
 ```
+To schedule regular backups, you can create a cron job to run the mysqldump command at a specified interval. 
+For example, to run a backup every day at 1am, you could add the following line to your crontab file:
+
+``` 0 1 * * * mysqldump -u username -p password --databases database_name > backup_file.sql ```
+This will create a backup file named backup_file.sql in the current directory at 1am every day.
+``` mysql -u username -p password database_name < backup_file.sql ``
+
